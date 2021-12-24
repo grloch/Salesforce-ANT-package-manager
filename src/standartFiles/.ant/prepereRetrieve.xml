@@ -1,0 +1,13 @@
+<project name="prepereRetrieve target" basedir="../">
+
+    <target name="prepereRetrieve">
+
+        <mkdir dir="./packages" />
+        <delete dir="./packages/${packagename}" />
+        <mkdir dir="./packages/${packagename}" />
+
+        <mkdir dir="./logs" />
+        <mkdir dir="./logs/${packagename}" />
+    </target>
+
+</project>

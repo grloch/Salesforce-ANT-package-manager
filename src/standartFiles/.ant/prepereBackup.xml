@@ -1,0 +1,13 @@
+<project name="prepereBackup target" basedir="../">
+
+    <target name="prepereBackup">
+
+        <mkdir dir="./backup" />
+        <mkdir dir="./backup/${packagename}" />
+        <mkdir dir="./backup/${packagename}/temp" />
+
+        <mkdir dir="./logs" />
+        <mkdir dir="./logs/${packagename}" />
+    </target>
+
+</project>

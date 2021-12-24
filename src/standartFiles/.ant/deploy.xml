@@ -1,0 +1,70 @@
+<project name="deploy target" basedir="." xmlns:sf="antlib:com.salesforce">
+
+	<import file="./echoTimeStamp.xml" />
+	<import file="./prepereDeploy.xml" />
+
+	<tstamp>
+		<format property="now" pattern="yyyy-MM-dd___HH-mm-ss" />
+	</tstamp>
+
+	<target name="deploy" if="packagename">
+		<tstamp>
+			<format property="now" pattern="yyyy-MM-dd___HH-mm-ss" />
+		</tstamp>
+
+		<antcall target="prepereDeploy">
+			<param name="packagename" value="${packagename}" />
+		</antcall>
+
+		<fail unless="logPath" message="logPath not set." />
+
+		<record name="${logPath}" action="start" append="false" />
+
+		<fail unless="packagename" message="packagename not set." />
+		<fail unless="user" message="user not set." />
+		<fail unless="pwd" message="pwd not set." />
+		<fail unless="url" message="url not set." />
+		<fail unless="checkOnly" message="checkOnly not set." />
+		<fail unless="testlevel" message="testlevel not set." />
+
+		<antcall target="echoTimeStamp">
+			<param name="text" value="Started" />
+		</antcall>
+
+		<property name="deployRoot" value="./packages/${packagename}/" /> 
+		
+
+		<condition property="testClass" value="">
+			<not>
+				<isset property="testClass" />
+			</not>
+		</condition> 
+		<!-- 
+
+		-->
+
+		<echo></echo>
+		<echo> Login with user......: ${user}</echo>
+		<echo> Deploy Package.......: ${packagename}</echo>
+		<echo> Deploy root..........: ${deployRoot}</echo>
+		<echo> Check Only...........: ${checkOnly}</echo>
+		<echo> Test Level...........: ${testlevel}</echo>
+		<echo> Run specified tests..: ${testClass}</echo>
+		<echo></echo>
+
+
+		<sf:deploy username="${user}" password="${pwd}" serverurl="${url}" maxPoll="100000" testlevel="${testlevel}" deployRoot="${deployRoot}" checkOnly="${checkOnly}" rollbackOnError="true" allowMissingFiles="false" autoUpdatePackage="${autoUpdatePackage}"> 
+		
+		<!-- Apex classes test - start -->
+		<!-- Apex classes test - end -->
+
+		 </sf:deploy>
+
+		
+		 <antcall target="echoTimeStamp">
+			<param name="text" value="Finished" />
+		</antcall>
+
+		<record name="${logPath}" action="stop" /> 
+	</target>
+</project>

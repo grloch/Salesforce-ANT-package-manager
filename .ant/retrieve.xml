@@ -1,0 +1,50 @@
+<project name="retrieve target" basedir="." xmlns:sf="antlib:com.salesforce">
+
+    <import file="./echoTimeStamp.xml" />
+    <import file="./prepereRetrieve.xml" />
+
+    <tstamp>
+        <format property="now" pattern="yyyy-MM-dd___HH-mm-ss" />
+    </tstamp>
+
+    <target name="retrieve" if="packagename">
+        <tstamp>
+            <format property="now" pattern="yyyy-MM-dd___HH-mm-ss" />
+        </tstamp>
+
+        <antcall target="prepereRetrieve">
+            <param name="packagename" value="${packagename}" />
+        </antcall>
+
+        <fail unless="logPath" message="logPath not set." />
+
+        <record name="${logPath}" action="start" append="false" />
+
+        <fail unless="packagename" message="packagename not set." />
+        <fail unless="user" message="user not set." />
+        <fail unless="pwd" message="pwd not set." />
+        <fail unless="url" message="url not set." />
+
+        <antcall target="echoTimeStamp">
+            <param name="text" value="Started" />
+        </antcall>
+
+        <property name="unpackaged" value="./unpackaged/${packagename}.xml" />
+        <property name="downloadDir" value="./packages/${packagename}" />
+
+        <echo></echo>
+        <echo> Login with user..: ${user}</echo>
+        <echo> RETRIEVE Package.: ${unpackaged}</echo>
+        <echo> On folder........: ${downloadDir}</echo>
+        <echo> With URL.........: ${url} ${line.separator} ${line.separator} </echo>
+
+        <sf:retrieve username="${user}" password="${pwd}" serverurl="${url}" maxPoll="100000" retrieveTarget="${downloadDir}" unpackaged="${unpackaged}" />
+        
+        <antcall target="echoTimeStamp">
+            <param name="text" value="Finished" />
+        </antcall>
+
+        <record name="${logPath}" action="stop" />
+
+    </target>
+</project>

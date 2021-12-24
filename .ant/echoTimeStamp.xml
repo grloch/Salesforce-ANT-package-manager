@@ -1,0 +1,11 @@
+<project name="echoTimeStamp target" basedir="../">
+
+    <target name="echoTimeStamp" if="text">
+
+        <tstamp>
+            <format property="time" pattern="yyyy-MM-dd HH:mm:ss" />
+        </tstamp>
+        <echo>${text}: ${time}</echo>
+    </target>
+
+</project>

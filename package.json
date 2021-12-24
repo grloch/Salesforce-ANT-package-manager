@@ -1,0 +1,32 @@
+{
+  "name": "Salesforce-ANT-package-manager-master",
+  "version": "2.0.0",
+  "description": "This is a simple Gulp + ANT package manager for Salesforce",
+  "main": "gulpfile.js",
+  "scripts": {
+    "select-task": "npx gulp",
+    "setup": "node ./src/createConfigFile.js",
+    "refresh-standart-files": "node ./src/refreshStandartFiles.js"
+  },
+  "keywords": [
+    "gulp",
+    "ant",
+    "node",
+    "package manager",
+    "salesforce"
+  ],
+  "author": "Gabriel Loch",
+  "dependencies": {
+    "archiver": "^5.0.0",
+    "extract-zip": "^2.0.1",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-zip": "^5.0.2",
+    "inquirer": "^7.3.2",
+    "mkdirp": "^1.0.4",
+    "ncp": "^2.0.0",
+    "xml2js": "^0.4.23"
+  }
+}

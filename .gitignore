@@ -1,0 +1,17 @@
+envs/*
+.env/*
+.envs/*
+env/*
+.envs.json
+node_modules/*
+unpackaged/*
+closedPkg/*
+logs/*
+packages/*
+build.properties
+/project.config.js
+backup/*
+notes/*
+.history/*
+.vscode/*
+package-lock.json

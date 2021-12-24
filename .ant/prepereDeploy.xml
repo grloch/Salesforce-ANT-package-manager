@@ -1,0 +1,7 @@
+<project name="prepereDeploy target" basedir="../">
+    <target name="prepereDeploy">
+
+        <mkdir dir="./logs" />
+        <mkdir dir="./logs/${packagename}" />
+    </target>
+</project>

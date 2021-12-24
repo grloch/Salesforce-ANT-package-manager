@@ -1,0 +1,8 @@
+<project name="ANT Project" basedir="." xmlns:sf="antlib:com.salesforce">
+	<import file="./.ant/retrieve.xml" />
+	<import file="./.ant/deploy.xml" />
+	<import file="./.ant/backup.xml" />
+
+	<property environment="env" />
+
+</project>
